@@ -1,11 +1,22 @@
+/*	Write an Object Oriented Program using C++ to create polynomial type Objects. These Polynomial type
+	Objects are created using Singly Link List type Objects, which are again created using Node type multi-field
+	objects. Every object may take different type of numeric data values (Use Template). Each object is created
+	with their related operations. In additions do the followings for the polynomial type objects:
+	a. Addion of two polynomials – using function and operator overloading
+	b. Subtraction of two polynomials - using function and operator overloading
+	c. Mulplictiaon of two polynomials - using function and operator overloading
+	d. Evaluation of a polynomial – using Horner’s rule
+	e. Creation of polynomial using input redirection operation (>>)
+	f. Printing the polynomial using output redirection operation (<<)
+	All kind of exception must be properly handled by the applicaon system.
+*/
 #include <iostream>
 #include <math.h>
-
 using namespace std;
 
 class polynomial {
-    // node *poly1 = NULL, *poly2 = NULL, *poly3 = NULL;
     public:
+		// declaration of local class
         class node {
         public:
     	    int coeff;
@@ -18,9 +29,11 @@ class polynomial {
             }
 	    };
         node *poly;
+		// declaration of constructor
         polynomial() {
             poly = NULL;
-        }        
+        }
+		// overloading ">>" operator
         friend istream&operator>>(istream & input, polynomial &obj) {
         	node *ptr, *temp, *head;
 	    	int power, flag = 0;
@@ -30,6 +43,7 @@ class polynomial {
     		input >> power;
 	
     		while (power != -1) {
+				// if head is NULL
     		    if(flag == 0) {
     		        cout << "Enter the co-efficient of power " << power << ": ";
     		        input >> coeff;
@@ -50,7 +64,7 @@ class polynomial {
     		obj.poly = head; 
     		return input; 
 		}
-
+		// overloading "<<" operator
 		friend ostream&operator<<(ostream &output, polynomial &obj) {
     		node *temp = obj.poly; 
     		int power = temp->pow; 
