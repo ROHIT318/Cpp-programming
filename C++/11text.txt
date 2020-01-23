@@ -1,8 +1,0 @@
-1)creating a structure
-2)creating a class dllist (It will contain all the required functions)
-	insertFirst(T value)
-	insertLast(T value)
-	insertPosition(T value, int position)
-	deleteFirst()
-	deleteLast()
-	deletePosition(int position)
