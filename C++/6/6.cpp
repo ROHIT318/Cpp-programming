@@ -1,6 +1,9 @@
+/*	Design a class Time having hour, minute, second and microsecond as data members. Use suitable constructor
+	to initiate the object. Overload + and – operators to add and subtract two objects of the class. Also overload
+	++ and -- to increment and decrement the hour by 1 respectively.
+*/
 #include <iostream>
 #include <cmath>
-
 using namespace std; 
 
 class time {		
@@ -8,14 +11,14 @@ class time {
 		int hh; 
 		int mm; 
 		int ss; 
-		
+		// constructor declaration
 		time()
 		{	
 			hh = 0; 
 			mm = 0; 
 			ss = 0; 
 		}
-		
+		// overloading constructor
 		time(int hour, int minute, int second)
 		{	
 			hh = hour; 
@@ -87,7 +90,7 @@ class time {
 		}
 };
 
-
+// needs modification on main function using infinite while and switch case
 int main()
 {
 	time t1(2,26,45); 
