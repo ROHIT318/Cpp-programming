@@ -1,8 +1,13 @@
+/*  Write a program in C++ to generate postfix expression from the infix form and vice-versa. The infix expression
+	and the postfix expression in respective cases are to be passed as the input to the constructor of a class.
+*/
 #include <iostream>
+using namespace std;
+/* creating stack for conversion operations */
+// increase the size as per expression size
 #define size 10
 int top = -1; 
 
-using namespace std; 
 
 template<class T> 
 class stack {
@@ -43,7 +48,9 @@ class stack {
             return 0; 
         }
 }; 
+/* creation of stack done */
 
+// function to compare the precedence of two mathematical symbols
 int prec(char op) {
     if(op == '*' || op == '/') {
         return 2; 
@@ -59,6 +66,7 @@ int prec(char op) {
     }
 }
 
+// function to check if the symbol is an operand or not (parameter is character type)
 int isOperand (char ch) {
     if( (ch >= 'A' &&  ch <= 'Z') || (ch >= 'a' &&  ch <= 'z') )
         return 1;
@@ -66,8 +74,10 @@ int isOperand (char ch) {
         return 0; 
 }
 
+// function to convert Infix expression to postfix
 void InfixToPostfix(string expression) {
     stack<char> finalExpr; 
+	// pushing "u" into stack for identifying the last element
     finalExpr.push('u'); 
     char ch, op; 
 
@@ -90,9 +100,8 @@ void InfixToPostfix(string expression) {
             else if (op == ')') {
                 while (ch != '(') {
                     ch = finalExpr.pop(); 
-                    if (ch != '(') {
+                    if (ch != '(')
                         cout << ch; 
-                    }
                 }
             }
             else {
@@ -115,13 +124,14 @@ void InfixToPostfix(string expression) {
     }
 }
 
+// function to check if the character is an operand (parameter is string type)
 int isOperand (string ch) {
     if( (ch >= "A" &&  ch <= "Z") || (ch >= "a" &&  ch <= "z") )
         return 1;
     else
         return 0; 
 }
-
+// function for converting postfix expression to infix expression
 void PostfixToInfix(string expression) {
 	stack<string> finalExpr; 
 	string expr = ""; 
@@ -129,8 +139,7 @@ void PostfixToInfix(string expression) {
 	for(int i = 0; i < expression.length(); i++) {
 		string ch(1, expression[i]); 
 		if(isOperand(ch) == 1) {
-			finalExpr.push(ch); 
-			// cout << ch; 
+			finalExpr.push(ch);
 		}
 		else {
 			string first = finalExpr.pop(); 
@@ -142,7 +151,7 @@ void PostfixToInfix(string expression) {
 	expr = finalExpr.pop(); 
 	cout << expr; 
 }
-
+// in main function needs to add infinite while and switch cases
 int main() {
 	string expr = /*"(a+b*c-d)/(e*f)"*/ "a+b*c-d"; 
 
