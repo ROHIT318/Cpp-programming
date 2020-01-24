@@ -1,23 +1,30 @@
+/* 	Write a program to create a class DLList to implement doubly linked list of template type. The program
+	should have support for ordered inseron and deleon of a node. Provide a method revlist() that will contain
+	the nodes of the doubly linked list but in reverse order.
+*/
 #include <iostream>
-
 using namespace std; 
-
+// class for creating doubly link list type objects
 template <class T>
 class dllist {
+	// class for creating nodes
 	class node {
 		public:
 			node *previous; 
 			T data; 
 			node *next; 
+			// constructor
 			node(T value) {
 				data = value; 
 				previous = NULL; 
 				next = NULL; 
 			}
 	};
+	// decalaration of head and tail of the list
 	node *head = NULL; 
 	node *tail = NULL; 
 	public:
+		// function to insert node at head position
 		void insertFirst(T value) {
 			node *temp, *ptr; 
 			
@@ -31,7 +38,7 @@ class dllist {
 				temp->next = head; 
 				temp->previous = NULL; 
 				head = temp; 
-				
+				// maybe not needed
 				temp = head; 
 				while(temp->next != NULL) {
 					temp = temp->next; 
@@ -39,7 +46,7 @@ class dllist {
 				tail = temp; 
 			}
 		}
-		
+		// function to insert node at a particular position.
 		void insertPosition(T value, int position) {
 			node *temp = head; 
 			node *ptr = new node(value); 
@@ -54,14 +61,19 @@ class dllist {
 			ptr->next = temp; 
 			temp->previous = ptr; 
 		}
-		
+		// function to insert node at tail position
 		void insertLast(T value) {
 			node *temp; 
 			node *ptr; 
-			
+					
 			ptr = new node(value); 
 			temp = head; 
-			
+			/* short method:
+			tail->next = ptr;
+			ptr->next = NULL;
+			tail = ptr;
+			*/
+			// OR you can follow this long method:
 			while(temp->next != NULL) {
 				temp = temp->next; 
 			}
@@ -71,7 +83,7 @@ class dllist {
 			ptr->previous = temp; 
 			tail = ptr; 
 		}
-
+		// function to delete node at head position
 		void deleteHead() {
 			node *temp; 
 			temp = head; 
@@ -80,7 +92,7 @@ class dllist {
 			head = temp; 
 			head->previous = NULL; 
 		}
-
+		// function to delete a node from a particular position
 		void deletePosition(int position) {
 			int counter = 1; 
 			node *temp, *ptr, *nptr; 
@@ -95,7 +107,7 @@ class dllist {
 			ptr->next = nptr; 
 			nptr->previous = ptr; 
 		}
-
+		// function to delete the tail node
 		void deleteLast() {
 			node *temp; 
 			temp = tail; 
@@ -104,7 +116,7 @@ class dllist {
 			temp->next = NULL; 
 			tail = temp; 
 		}
-
+		// function to reverse list
 		void revList() {
 			node *temp = head;  
     		node *ptr = NULL; 
@@ -121,7 +133,7 @@ class dllist {
 			head = tail; 
 			tail = temp; 
 		}
-		
+		// function to display the list
 		void displayList() {
 			node *temp; 
 			
@@ -132,7 +144,7 @@ class dllist {
 			}
 		}
 };
-
+// main function
 int main() {
 	dllist<int> a; 
 	
