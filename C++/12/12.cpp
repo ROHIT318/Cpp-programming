@@ -13,7 +13,7 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
-
+// function to create polynomial equation type objects
 class polynomial {
     public:
 		// declaration of local class
@@ -22,6 +22,7 @@ class polynomial {
     	    int coeff;
     	    int pow;
     	    node* next;
+			// constructor
             node(int value, int power) {
                 coeff = value;
                 pow = power;
@@ -29,12 +30,12 @@ class polynomial {
             }
 	    };
         node *poly;
-		// declaration of constructor
+		// constructor
         polynomial() {
             poly = NULL;
         }
 		// overloading ">>" operator
-        friend istream&operator>>(istream & input, polynomial &obj) {
+        friend istream&operator>>(istream &input, polynomial &obj) {
         	node *ptr, *temp, *head;
 	    	int power, flag = 0;
 	    	int coeff;
@@ -95,16 +96,17 @@ class polynomial {
 		polynomial operator+(polynomial &obj); 
         polynomial operator-(polynomial &obj); 
         polynomial operator*(polynomial &obj); 
-        friend int horner(polynomial &obj, int x) {
-			int sum = 0; 
-	
-			for(node *temp = obj.poly; temp != NULL; temp = temp->next) {
-				sum += temp->coeff * pow(x, temp->pow); 
-			}
-			return sum; 
-		}
+        friend int horner(polynomial &obj, int x);
 };
-
+//function to find horner rule result of polynomial equation
+int horner(polynomial &obj, int x) {
+	int sum = 0; 
+	for(node *temp = obj.poly; temp != NULL; temp = temp->next) {
+		sum += temp->coeff * pow(x, temp->pow); 
+	}
+	return sum; 
+}
+// function to overload "+" operator
 polynomial polynomial::operator+(polynomial &obj) {
     polynomial var;
     node *temp1, *temp2, *temp3 = NULL, *r_temp, *p_temp;
@@ -127,7 +129,7 @@ polynomial polynomial::operator+(polynomial &obj) {
     var.poly = temp3;
     return var;
 }
-
+// function to overload "-" operator
 polynomial polynomial::operator-(polynomial &obj) {
     polynomial var;
     node *temp1, *temp2, *temp3 = NULL, *r_temp, *p_temp;
@@ -150,7 +152,7 @@ polynomial polynomial::operator-(polynomial &obj) {
     var.poly = temp3;
     return var;
 }
-
+// function to overload "*" operator
 polynomial polynomial::operator*(polynomial &obj) {
 	int mul, power; 
 	node *temp1 = this->poly; 
@@ -185,8 +187,7 @@ polynomial polynomial::operator*(polynomial &obj) {
 	var.poly = head; 
 	return var; 
 }
-
-
+// main function
 int main() {
     polynomial a, b, c; 
     int result, x; 
