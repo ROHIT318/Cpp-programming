@@ -34,7 +34,7 @@ class dllist {
 				tail = head; 
 			}
 			else {
-				head->previous = temp; 
+				head->previous = temp;
 				temp->next = head; 
 				temp->previous = NULL; 
 				head = temp; 
